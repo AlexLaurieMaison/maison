@@ -106,7 +106,7 @@ nav .badge{background:var(--gold);color:var(--bg);border-radius:10px;padding:0 7
 
 <script>
 // ====== Lien du script Google (rempli à la mise en ligne) ======
-var API_DEFAULT = 'https://script.google.com/macros/s/AKfycbwF4QwTwjxXXjOqz1iwKEsYfWQ05gaH0_M7aX3n7Wb290Fjekf41BsrwlYFjYR1n4Cq/exec';
+var API_DEFAULT = 'https://script.google.com/macros/s/AKfycbx5MqIS4bG9EjIqulXC3D7qMQPxR-VlPSc82Mjxe89l_IJzbWNsSNd0XfMvhgYCtGJGXQ/exec';
 // ===============================================================
 
 var CATS = [
@@ -117,6 +117,7 @@ var EMO = {}; CATS.forEach(function(c){ EMO[c[0]] = c[1]; });
 
 var DEMO = location.search.indexOf('demo') >= 0;
 var state = { products: load('products', []), pending: load('pending', []), who: load('who', ''), api: load('api', '') || API_DEFAULT, page: 'buy' };
+if (state.api.indexOf('AKfycbwF4Qw') >= 0) { state.api = API_DEFAULT; save('api', ''); state.products = []; }
 var params = new URLSearchParams(location.search);
 if (params.get('api')) { state.api = params.get('api'); save('api', state.api); }
 
