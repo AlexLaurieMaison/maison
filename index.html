@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0E0F13">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Maison">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Maison</title>
+<style>
+:root{
+  --bg:#0E0F13;--card:#181A21;--card2:#20232C;--line:#2A2D37;
+  --txt:#FFFFFF;--grey:#A0A4AE;--dim:#6B7080;--gold:#E9B949;--gold-soft:rgba(233,185,73,.14);--red:#FF6B6B;
+  --safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px}
+body{min-height:100vh;padding-bottom:calc(84px + var(--safe-b))}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:calc(14px + var(--safe-t)) 16px 10px;display:flex;align-items:center;gap:12px}
+header .t{flex:1}
+header h1{margin:0;font-size:24px;letter-spacing:-.3px}
+header .sub{color:var(--gold);font-size:13px;font-weight:700;margin-top:2px}
+.icon-btn{width:42px;height:42px;border-radius:21px;background:var(--card);color:var(--grey);font-size:19px;display:grid;place-items:center}
+.icon-btn.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{padding:0 16px}
+.page{display:none}.page.on{display:block}
+.group{margin:16px 0 0}
+.group h2{font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin:0 4px 8px;display:flex;gap:8px;align-items:center}
+.card{background:var(--card);border-radius:18px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:14px 14px;min-height:60px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .name{flex:1;font-size:17px;line-height:1.25}
+.row .meta{display:block;font-size:12px;color:var(--dim);margin-top:2px}
+.buy{width:44px;height:44px;border-radius:22px;border:2px solid var(--gold);color:var(--gold);font-size:20px;font-weight:800;display:grid;place-items:center;flex:none}
+.buy:active{background:var(--gold);color:var(--bg)}
+.pill{flex:none;padding:8px 13px;border-radius:20px;font-size:13px;font-weight:800;background:var(--card2);color:var(--dim);min-width:84px;text-align:center}
+.pill.on{background:var(--gold);color:var(--bg)}
+.edit{flex:none;width:34px;height:34px;border-radius:17px;color:var(--dim);font-size:16px}
+.empty{text-align:center;color:var(--grey);padding:60px 20px;font-size:17px;line-height:1.5}
+.empty b{display:block;font-size:44px;margin-bottom:10px}
+.search{position:sticky;top:calc(70px + var(--safe-t));z-index:4;background:var(--bg);padding:6px 0 4px}
+.search input{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:16px;color:var(--txt);font-size:17px;padding:15px 16px;outline:none}
+.search input:focus{border-color:var(--gold)}
+.addcard{margin-top:12px;background:var(--gold-soft);border:1.5px solid rgba(233,185,73,.5);border-radius:18px;padding:14px}
+.addcard .ttl{font-weight:800;font-size:17px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:9px 13px;border-radius:20px;background:var(--card2);color:var(--grey);font-weight:700;font-size:14px}
+.chip.on{background:var(--gold);color:var(--bg)}
+.big{display:block;width:100%;margin-top:12px;padding:15px;border-radius:16px;background:var(--gold);color:var(--bg);font-weight:800;font-size:17px}
+.big.ghost{background:var(--card2);color:var(--txt)}
+.big.danger{background:none;color:var(--red)}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:rgba(14,15,19,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;padding:8px 12px calc(8px + var(--safe-b))}
+nav button{flex:1;padding:8px 4px;border-radius:14px;color:var(--dim);font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button .ic{font-size:22px}
+nav button.on{color:var(--gold);background:var(--gold-soft)}
+nav .badge{background:var(--gold);color:var(--bg);border-radius:10px;padding:0 7px;font-size:11px;margin-left:4px}
+.sheet-bg{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.6);display:none;align-items:flex-end}
+.sheet-bg.on{display:flex}
+.sheet{width:100%;background:var(--card);border-radius:24px 24px 0 0;padding:20px 18px calc(22px + var(--safe-b));max-height:90vh;overflow:auto}
+.sheet h3{margin:0 0 6px;font-size:20px}
+.sheet p{color:var(--grey);margin:0 0 14px;line-height:1.45;font-size:15px}
+.sheet input{width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;color:var(--txt);font-size:17px;padding:14px;outline:none;margin-bottom:12px}
+.sheet input:focus{border-color:var(--gold)}
+.lbl{font-size:13px;color:var(--dim);font-weight:700;margin:6px 0 8px}
+.toast{position:fixed;left:16px;right:16px;bottom:calc(92px + var(--safe-b));z-index:30;background:#2B2E38;color:var(--txt);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.4);transform:translateY(150%);opacity:0;transition:.25s}
+.toast.on{transform:none;opacity:1}
+.toast span{flex:1}
+.toast button{color:var(--gold);font-weight:800;padding:4px 6px}
+.status{font-size:12px;color:var(--dim);text-align:center;margin:18px 0 6px}
+.status.err{color:var(--red)}
+</style>
+</head>
+<body>
+<header>
+  <div class="t">
+    <h1 id="title">À acheter</h1>
+    <div class="sub" id="sub"></div>
+  </div>
+  <button class="icon-btn" id="refresh" aria-label="Actualiser">↻</button>
+  <button class="icon-btn" id="settings" aria-label="Réglages">⚙</button>
+</header>
+
+<main>
+  <section class="page on" id="p-buy"></section>
+  <section class="page" id="p-all">
+    <div class="search"><input id="q" placeholder="Chercher ou ajouter un produit…" autocomplete="off" enterkeyhint="done"></div>
+    <div id="addzone"></div>
+    <div id="allList"></div>
+  </section>
+  <div class="status" id="status"></div>
+</main>
+
+<nav>
+  <button class="on" data-p="buy"><span class="ic">🛒</span><span>À acheter<span class="badge" id="badge"></span></span></button>
+  <button data-p="all"><span class="ic">📋</span><span>Produits</span></button>
+</nav>
+
+<div class="sheet-bg" id="sheetBg"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"><span id="toastTxt"></span><button id="toastBtn">Annuler</button></div>
+
+<script>
+// ====== Lien du script Google (rempli à la mise en ligne) ======
+var API_DEFAULT = 'https://script.google.com/macros/s/AKfycbwF4QwTwjxXXjOqz1iwKEsYfWQ05gaH0_M7aX3n7Wb290Fjekf41BsrwlYFjYR1n4Cq/exec';
+// ===============================================================
+
+var CATS = [
+  ['Fruits & légumes','🥦'],['Frais','🧀'],['Viande & poisson','🍗'],['Épicerie','🍝'],
+  ['Boissons','🥤'],['Surgelés','❄️'],['Hygiène','🧴'],['Maison','🧽'],['Autre','📦']
+];
+var EMO = {}; CATS.forEach(function(c){ EMO[c[0]] = c[1]; });
+
+var DEMO = location.search.indexOf('demo') >= 0;
+var state = { products: load('products', []), pending: load('pending', []), who: load('who', ''), api: load('api', '') || API_DEFAULT, page: 'buy' };
+var params = new URLSearchParams(location.search);
+if (params.get('api')) { state.api = params.get('api'); save('api', state.api); }
+
+function load(k, d){ try { var v = localStorage.getItem('maison_' + k); return v ? JSON.parse(v) : d; } catch(e){ return d; } }
+function save(k, v){ try { localStorage.setItem('maison_' + k, JSON.stringify(v)); } catch(e){} }
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function uid(){ return Math.random().toString(36).slice(2, 10); }
+
+// ---------- Synchro ----------
+var busy = false, lastErr = '';
+function call(params){
+  if (DEMO) return Promise.resolve({ ok: true, products: state.products });
+  var url = state.api + (state.api.indexOf('?') >= 0 ? '&' : '?') + new URLSearchParams(params).toString() + '&t=' + Date.now();
+  return fetch(url, { redirect: 'follow' }).then(function(r){ return r.json(); }).then(function(j){
+    if (!j.ok) throw new Error(j.error || 'Erreur du script');
+    return j;
+  });
+}
+function applyPending(list){
+  state.pending.forEach(function(op){
+    if (op.action === 'set') list.forEach(function(p){ if (p.id === op.id) p.missing = op.missing === '1'; });
+    else if (op.action === 'add' && !list.some(function(p){ return p.name.toLowerCase() === op.name.toLowerCase(); }))
+      list.push({ id: op.id, name: op.name, cat: op.cat, missing: op.missing !== '0', by: op.by, at: Date.now() });
+    else if (op.action === 'del') list = list.filter(function(p){ return p.id !== op.id; });
+    else if (op.action === 'edit') list.forEach(function(p){ if (p.id === op.id){ p.name = op.name; p.cat = op.cat; } });
+  });
+  return list;
+}
+function sync(){
+  if (!state.api && !DEMO) { render(); return; }
+  if (busy) return;
+  busy = true; $('refresh').classList.add('spin');
+  var next = function(){
+    if (state.pending.length) {
+      return call(state.pending[0]).then(function(j){
+        state.pending.shift(); save('pending', state.pending);
+        if (!state.pending.length) { state.products = j.products; }
+        return next();
+      });
+    }
+    return call({ action: 'list' }).then(function(j){ state.products = applyPending(j.products); });
+  };
+  next().then(function(){ lastErr = ''; save('products', state.products); save('synced', Date.now()); })
+    .catch(function(e){ lastErr = navigator.onLine ? (e.message || 'Synchro impossible') : 'Hors connexion : les changements seront envoyés plus tard'; })
+    .then(function(){ busy = false; $('refresh').classList.remove('spin'); render(); });
+}
+function op(o){
+  o.by = state.who;
+  state.pending.push(o); save('pending', state.pending);
+  state.products = applyPending(state.products.slice().map(function(p){ return Object.assign({}, p); }));
+  // applyPending rejoue tout : on retire les doublons d'ajout éventuels
+  save('products', state.products);
+  render();
+  sync();
+}
+
+// ---------- Rendu ----------
+function grouped(list){
+  var g = {};
+  list.forEach(function(p){ (g[p.cat] = g[p.cat] || []).push(p); });
+  var order = CATS.map(function(c){ return c[0]; });
+  return Object.keys(g).sort(function(a, b){
+    var ia = order.indexOf(a), ib = order.indexOf(b);
+    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b);
+  }).map(function(k){ return [k, g[k].sort(function(a, b){ return a.name.localeCompare(b.name, 'fr'); })]; });
+}
+function render(){
+  var missing = state.products.filter(function(p){ return p.missing; });
+  $('badge').textContent = missing.length ? missing.length : '';
+  $('badge').style.display = missing.length ? '' : 'none';
+  $('title').textContent = state.page === 'buy' ? 'À acheter' : 'Produits';
+  $('sub').textContent = state.page === 'buy'
+    ? (missing.length ? missing.length + ' produit' + (missing.length > 1 ? 's' : '') + ' manque' + (missing.length > 1 ? 'nt' : '') : 'Rien ne manque')
+    : state.products.length + ' produits · touche ce qui manque';
+  document.querySelectorAll('nav button').forEach(function(b){ b.classList.toggle('on', b.dataset.p === state.page); });
+  $('p-buy').classList.toggle('on', state.page === 'buy');
+  $('p-all').classList.toggle('on', state.page === 'all');
+
+  if (!state.api && !DEMO) {
+    $('p-buy').innerHTML = '<div class="empty"><b>🔗</b>Il manque le lien de la liste.<br>Touche ⚙ pour le coller.</div>';
+    $('allList').innerHTML = ''; $('status').textContent = ''; return;
+  }
+
+  // Page « À acheter »
+  if (!missing.length) {
+    $('p-buy').innerHTML = '<div class="empty"><b>🎉</b>Rien ne manque pour l\'instant.<br><span style="color:var(--dim);font-size:15px">Ajoute ce qui manque depuis « Produits ».</span></div>';
+  } else {
+    $('p-buy').innerHTML = grouped(missing).map(function(g){
+      return '<div class="group"><h2>' + (EMO[g[0]] || '📦') + ' ' + esc(g[0]) + '</h2><div class="card">' + g[1].map(function(p){
+        return '<div class="row"><div class="name">' + esc(p.name) + (p.by ? '<span class="meta">ajouté par ' + esc(p.by) + '</span>' : '') +
+          '</div><button class="buy" data-buy="' + esc(p.id) + '" aria-label="Acheté">✓</button></div>';
+      }).join('') + '</div></div>';
+    }).join('');
+  }
+  renderAll();
+  var synced = load('synced', 0);
+  $('status').className = 'status' + (lastErr ? ' err' : '');
+  $('status').textContent = lastErr || (synced ? 'À jour · ' + new Date(synced).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : '');
+}
+function renderAll(){
+  var q = $('q').value.trim().toLowerCase();
+  var list = state.products.filter(function(p){ return !q || p.name.toLowerCase().indexOf(q) >= 0; });
+  var exact = state.products.some(function(p){ return p.name.toLowerCase() === q; });
+  $('addzone').innerHTML = q && !exact ? '<div class="addcard"><div class="ttl">＋ Ajouter « ' + esc($('q').value.trim()) + ' »</div>' +
+    '<div class="lbl">Rayon</div><div class="chips">' + CATS.map(function(c, i){
+      return '<button class="chip' + (i === addCat ? ' on' : '') + '" data-addcat="' + i + '">' + c[1] + ' ' + c[0] + '</button>';
+    }).join('') + '</div><button class="big" id="addBtn">Ajouter à ce qui manque</button></div>' : '';
+  $('allList').innerHTML = list.length ? grouped(list).map(function(g){
+    return '<div class="group"><h2>' + (EMO[g[0]] || '📦') + ' ' + esc(g[0]) + '</h2><div class="card">' + g[1].map(function(p){
+      return '<div class="row" data-toggle="' + esc(p.id) + '"><div class="name">' + esc(p.name) + '</div>' +
+        '<span class="pill' + (p.missing ? ' on' : '') + '">' + (p.missing ? '✓ Manque' : 'En stock') + '</span>' +
+        '<button class="edit" data-edit="' + esc(p.id) + '" aria-label="Modifier">✎</button></div>';
+    }).join('') + '</div></div>';
+  }).join('') : (q ? '' : '<div class="empty"><b>📋</b>Aucun produit pour l\'instant.<br>Tape un nom en haut pour l\'ajouter.</div>');
+}
+var addCat = 3;
+
+// ---------- Actions ----------
+function find(id){ return state.products.filter(function(p){ return p.id === id; })[0]; }
+var undoFn = null, toastTimer = null;
+function toast(msg, undo){
+  $('toastTxt').textContent = msg; undoFn = undo || null;
+  $('toastBtn').style.display = undo ? '' : 'none';
+  $('toast').classList.add('on');
+  clearTimeout(toastTimer); toastTimer = setTimeout(function(){ $('toast').classList.remove('on'); }, 3500);
+}
+$('toastBtn').onclick = function(){ if (undoFn) undoFn(); $('toast').classList.remove('on'); };
+
+document.addEventListener('click', function(e){
+  var t = e.target.closest('[data-buy],[data-toggle],[data-edit],[data-addcat],#addBtn,nav button');
+  if (!t) return;
+  if (t.dataset.p) { state.page = t.dataset.p; render(); window.scrollTo(0, 0); return; }
+  if (t.dataset.buy) {
+    var p = find(t.dataset.buy); if (!p) return;
+    op({ action: 'set', id: p.id, missing: '0' });
+    toast(p.name + ' : acheté ✓', function(){ op({ action: 'set', id: p.id, missing: '1' }); });
+    return;
+  }
+  if (t.dataset.edit) { e.stopPropagation(); editSheet(find(t.dataset.edit)); return; }
+  if (t.dataset.toggle) {
+    var x = find(t.dataset.toggle); if (!x) return;
+    op({ action: 'set', id: x.id, missing: x.missing ? '0' : '1' });
+    if (!x.missing) toast(x.name + ' ajouté à « À acheter »');
+    return;
+  }
+  if (t.dataset.addcat) { addCat = +t.dataset.addcat; renderAll(); return; }
+  if (t.id === 'addBtn') addProduct();
+});
+function addProduct(){
+  var name = $('q').value.trim(); if (!name) return;
+  name = name.charAt(0).toUpperCase() + name.slice(1);
+  op({ action: 'add', id: uid(), name: name, cat: CATS[addCat][0], missing: '1' });
+  $('q').value = ''; renderAll();
+  toast(name + ' ajouté à « À acheter »');
+}
+$('q').addEventListener('input', renderAll);
+$('q').addEventListener('keydown', function(e){
+  if (e.key !== 'Enter') return;
+  var q = $('q').value.trim().toLowerCase();
+  var ex = state.products.filter(function(p){ return p.name.toLowerCase() === q; })[0];
+  if (ex) { if (!ex.missing) op({ action: 'set', id: ex.id, missing: '1' }); $('q').value = ''; renderAll(); toast(ex.name + ' ajouté à « À acheter »'); }
+  else addProduct();
+  $('q').blur();
+});
+
+// ---------- Fenêtres ----------
+function openSheet(html){ $('sheet').innerHTML = html; $('sheetBg').classList.add('on'); }
+function closeSheet(){ $('sheetBg').classList.remove('on'); }
+$('sheetBg').addEventListener('click', function(e){ if (e.target === $('sheetBg') && state.who) closeSheet(); });
+
+function editSheet(p){
+  if (!p) return;
+  var ci = Math.max(0, CATS.map(function(c){ return c[0]; }).indexOf(p.cat));
+  openSheet('<h3>Modifier</h3><input id="eName" value="' + esc(p.name) + '"><div class="lbl">Rayon</div><div class="chips" id="eCats">' +
+    CATS.map(function(c, i){ return '<button class="chip' + (i === ci ? ' on' : '') + '" data-i="' + i + '">' + c[1] + ' ' + c[0] + '</button>'; }).join('') +
+    '</div><button class="big" id="eSave">Enregistrer</button><button class="big danger" id="eDel">Supprimer ce produit</button>');
+  $('eCats').onclick = function(e){ var b = e.target.closest('.chip'); if (!b) return; ci = +b.dataset.i;
+    [].forEach.call($('eCats').children, function(c, i){ c.classList.toggle('on', i === ci); }); };
+  $('eSave').onclick = function(){ var n = $('eName').value.trim(); if (n) op({ action: 'edit', id: p.id, name: n, cat: CATS[ci][0] }); closeSheet(); };
+  $('eDel').onclick = function(){ if (confirm('Supprimer « ' + p.name + ' » de la liste des produits ?')) { op({ action: 'del', id: p.id }); closeSheet(); } };
+}
+
+function whoSheet(){
+  openSheet('<h3>Bienvenue 👋</h3><p>Comment tu t\'appelles ? Ton prénom s\'affichera à côté de ce que tu ajoutes.</p>' +
+    '<input id="wName" placeholder="Ton prénom" value="' + esc(state.who) + '"><button class="big" id="wOk">C\'est parti</button>');
+  $('wOk').onclick = function(){ var n = $('wName').value.trim(); if (!n) return; state.who = n; save('who', n); closeSheet(); render(); };
+}
+
+$('settings').onclick = function(){
+  openSheet('<h3>Réglages</h3><div class="lbl">Ton prénom</div><input id="sName" value="' + esc(state.who) + '">' +
+    '<div class="lbl">Lien de la liste (script Google)</div><input id="sApi" placeholder="https://script.google.com/macros/s/…/exec" value="' + esc(state.api) + '">' +
+    '<button class="big" id="sOk">Enregistrer</button>' +
+    '<button class="big ghost" id="sShare">Partager l\'appli</button>');
+  $('sOk').onclick = function(){
+    state.who = $('sName').value.trim() || state.who; save('who', state.who);
+    var a = $('sApi').value.trim(); if (a !== state.api) { state.api = a; save('api', a); state.products = []; }
+    closeSheet(); sync();
+  };
+  $('sShare').onclick = function(){
+    var url = location.origin + location.pathname + (state.api && state.api !== API_DEFAULT ? '?api=' + encodeURIComponent(state.api) : '');
+    if (navigator.share) navigator.share({ title: 'Maison', text: 'Notre liste de courses', url: url }).catch(function(){});
+    else { navigator.clipboard && navigator.clipboard.writeText(url); toast('Lien copié'); }
+  };
+};
+$('refresh').onclick = sync;
+
+// ---------- Démarrage ----------
+if (DEMO && !state.products.length) {
+  var demo = { 'Frais': ['Lait', 'Œufs', 'Beurre', 'Yaourts'], 'Fruits & légumes': ['Bananes', 'Tomates', 'Salade'], 'Épicerie': ['Pâtes', 'Café', 'Pain'], 'Maison': ['Lessive', 'Sacs poubelle'], 'Hygiène': ['Papier toilette'] };
+  var miss = { 'Lait': 1, 'Œufs': 1, 'Bananes': 1, 'Café': 1, 'Lessive': 1 };
+  Object.keys(demo).forEach(function(c){ demo[c].forEach(function(n){ state.products.push({ id: uid(), name: n, cat: c, missing: !!miss[n], by: miss[n] ? (n === 'Café' ? 'Alex' : 'Sarah') : '' }); }); });
+  if (!state.who) state.who = 'Alex';
+}
+render();
+if (!state.who) whoSheet();
+sync();
+setInterval(function(){ if (!document.hidden) sync(); }, 30000);
+document.addEventListener('visibilitychange', function(){ if (!document.hidden) sync(); });
+window.addEventListener('online', sync);
+if ('serviceWorker' in navigator && !DEMO) navigator.serviceWorker.register('sw.js').catch(function(){});
+</script>
+</body>
+</html>
