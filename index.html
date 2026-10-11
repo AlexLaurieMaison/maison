@@ -19,45 +19,55 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px}
-body{min-height:100vh;padding-bottom:calc(84px + var(--safe-b))}
+body{min-height:100vh;padding-bottom:calc(66px + var(--safe-b))}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
-header{position:sticky;top:0;z-index:5;background:var(--bg);padding:calc(14px + var(--safe-t)) 16px 10px;display:flex;align-items:center;gap:12px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:calc(8px + var(--safe-t)) 12px 6px;display:flex;align-items:center;gap:12px}
 header .t{flex:1}
-header h1{margin:0;font-size:24px;letter-spacing:-.3px}
-header .sub{color:var(--gold);font-size:13px;font-weight:700;margin-top:2px}
-.icon-btn{width:42px;height:42px;border-radius:21px;background:var(--card);color:var(--grey);font-size:19px;display:grid;place-items:center}
+header h1{margin:0;font-size:20px;letter-spacing:-.3px}
+header .sub{color:var(--gold);font-size:12px;font-weight:700;margin-top:2px}
+.icon-btn{width:36px;height:36px;border-radius:18px;background:var(--card);color:var(--grey);font-size:19px;display:grid;place-items:center}
 .icon-btn.spin{animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-main{padding:0 16px}
+main{padding:0 10px}
 .page{display:none}.page.on{display:block}
-.group{margin:16px 0 0}
-.group h2{font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin:0 4px 8px;display:flex;gap:8px;align-items:center}
-.card{background:var(--card);border-radius:18px;overflow:hidden}
-.row{display:flex;align-items:center;gap:12px;padding:14px 14px;min-height:60px;border-top:1px solid var(--line)}
+.group{margin:8px 0 0}
+.group h2{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin:0 4px 4px;display:flex;gap:8px;align-items:center}
+.card{background:var(--card);border-radius:14px;overflow:hidden}
+.row{display:flex;align-items:center;gap:10px;padding:7px 10px 7px 12px;min-height:44px;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
-.row .name{flex:1;font-size:17px;line-height:1.25}
-.row .meta{display:block;font-size:12px;color:var(--dim);margin-top:2px}
-.buy{width:44px;height:44px;border-radius:22px;border:2px solid var(--gold);color:var(--gold);font-size:20px;font-weight:800;display:grid;place-items:center;flex:none}
+.row .name{flex:1;font-size:15px;line-height:1.2}
+.row .meta{display:block;font-size:11px;color:var(--dim);margin-top:1px}
+.buy{width:34px;height:34px;border-radius:17px;border:2px solid var(--gold);color:var(--gold);font-size:16px;font-weight:800;display:grid;place-items:center;flex:none}
 .buy:active{background:var(--gold);color:var(--bg)}
-.pill{flex:none;padding:8px 13px;border-radius:20px;font-size:13px;font-weight:800;background:var(--card2);color:var(--dim);min-width:84px;text-align:center}
+.pill{flex:none;padding:5px 10px;border-radius:16px;font-size:12px;font-weight:800;background:var(--card2);color:var(--dim);min-width:74px;text-align:center}
 .pill.on{background:var(--gold);color:var(--bg)}
-.edit{flex:none;width:34px;height:34px;border-radius:17px;color:var(--dim);font-size:16px}
+.edit{flex:none;width:28px;height:28px;border-radius:14px;color:var(--dim);font-size:14px}
 .empty{text-align:center;color:var(--grey);padding:60px 20px;font-size:17px;line-height:1.5}
 .empty b{display:block;font-size:44px;margin-bottom:10px}
-.search{position:sticky;top:calc(70px + var(--safe-t));z-index:4;background:var(--bg);padding:6px 0 4px}
-.search input{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:16px;color:var(--txt);font-size:17px;padding:15px 16px;outline:none}
+.cats{position:sticky;top:calc(52px + var(--safe-t));z-index:4;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding:2px 10px 6px;margin:0 -10px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats .chip{flex:none;white-space:nowrap}
+.cats .chip small{opacity:.7;margin-left:4px;font-weight:800}
+.search{padding:2px 0 4px}
+.tools{display:flex;gap:8px;margin-top:6px}
+.tools button{flex:1;padding:9px;border-radius:12px;background:var(--card);color:var(--grey);font-weight:700;font-size:14px}
+textarea{width:100%;min-height:150px;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;color:var(--txt);font:inherit;font-size:16px;padding:14px;outline:none;margin-bottom:12px;resize:vertical}
+textarea:focus{border-color:var(--gold)}
+.switch{display:flex;align-items:center;gap:10px;margin:4px 0 6px;color:var(--grey);font-size:15px}
+.switch input{width:22px;height:22px;accent-color:var(--gold);margin:0}
+.search input{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:12px;color:var(--txt);font-size:16px;padding:10px 12px;outline:none}
 .search input:focus{border-color:var(--gold)}
 .addcard{margin-top:12px;background:var(--gold-soft);border:1.5px solid rgba(233,185,73,.5);border-radius:18px;padding:14px}
 .addcard .ttl{font-weight:800;font-size:17px;margin-bottom:10px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:9px 13px;border-radius:20px;background:var(--card2);color:var(--grey);font-weight:700;font-size:14px}
+.chip{padding:6px 11px;border-radius:16px;background:var(--card2);color:var(--grey);font-weight:700;font-size:13px}
 .chip.on{background:var(--gold);color:var(--bg)}
 .big{display:block;width:100%;margin-top:12px;padding:15px;border-radius:16px;background:var(--gold);color:var(--bg);font-weight:800;font-size:17px}
 .big.ghost{background:var(--card2);color:var(--txt)}
 .big.danger{background:none;color:var(--red)}
-nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:rgba(14,15,19,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;padding:8px 12px calc(8px + var(--safe-b))}
-nav button{flex:1;padding:8px 4px;border-radius:14px;color:var(--dim);font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:3px}
-nav button .ic{font-size:22px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:rgba(14,15,19,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;padding:5px 10px calc(5px + var(--safe-b))}
+nav button{flex:1;padding:5px 4px;border-radius:12px;color:var(--dim);font-weight:700;font-size:12px;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:6px}
+nav button .ic{font-size:18px}
 nav button.on{color:var(--gold);background:var(--gold-soft)}
 nav .badge{background:var(--gold);color:var(--bg);border-radius:10px;padding:0 7px;font-size:11px;margin-left:4px}
 .sheet-bg{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.6);display:none;align-items:flex-end}
@@ -68,11 +78,11 @@ nav .badge{background:var(--gold);color:var(--bg);border-radius:10px;padding:0 7
 .sheet input{width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;color:var(--txt);font-size:17px;padding:14px;outline:none;margin-bottom:12px}
 .sheet input:focus{border-color:var(--gold)}
 .lbl{font-size:13px;color:var(--dim);font-weight:700;margin:6px 0 8px}
-.toast{position:fixed;left:16px;right:16px;bottom:calc(92px + var(--safe-b));z-index:30;background:#2B2E38;color:var(--txt);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.4);transform:translateY(150%);opacity:0;transition:.25s;pointer-events:none}
+.toast{position:fixed;left:12px;right:12px;bottom:calc(64px + var(--safe-b));z-index:30;background:#2B2E38;color:var(--txt);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.4);transform:translateY(150%);opacity:0;transition:.25s;pointer-events:none}
 .toast.on{transform:none;opacity:1;pointer-events:auto}
 .toast span{flex:1}
 .toast button{color:var(--gold);font-weight:800;padding:4px 6px}
-.status{font-size:12px;color:var(--dim);text-align:center;margin:18px 0 6px}
+.status{font-size:11px;color:var(--dim);text-align:center;margin:10px 0 4px}
 .status.err{color:var(--red)}
 </style>
 </head>
@@ -87,10 +97,12 @@ nav .badge{background:var(--gold);color:var(--bg);border-radius:10px;padding:0 7
 </header>
 
 <main>
+  <div class="cats" id="cats"></div>
   <section class="page on" id="p-buy"></section>
   <section class="page" id="p-all">
     <div class="search"><input id="q" placeholder="Chercher ou ajouter un produit…" autocomplete="off" enterkeyhint="done"></div>
     <div id="addzone"></div>
+    <div class="tools" id="tools"><button id="bulkBtn">＋ Ajouter plusieurs produits</button></div>
     <div id="allList"></div>
   </section>
   <div class="status" id="status"></div>
@@ -116,7 +128,7 @@ var CATS = [
 var EMO = {}; CATS.forEach(function(c){ EMO[c[0]] = c[1]; });
 
 var DEMO = location.search.indexOf('demo') >= 0;
-var state = { products: load('products', []), pending: load('pending', []), who: load('who', ''), api: load('api', '') || API_DEFAULT, page: 'buy' };
+var state = { products: load('products', []), pending: load('pending', []), who: load('who', ''), api: load('api', '') || API_DEFAULT, page: 'buy', cat: load('cat', 'all') };
 if (state.api.indexOf('AKfycbwF4Qw') >= 0) { state.api = API_DEFAULT; save('api', ''); state.products = []; }
 var params = new URLSearchParams(location.search);
 if (params.get('api')) { state.api = params.get('api'); save('api', state.api); }
@@ -161,13 +173,25 @@ function sync(){
     }
     return call({ action: 'list' }).then(function(j){ state.products = applyPending(j.products); });
   };
-  next().then(function(){ lastErr = ''; save('products', state.products); save('synced', Date.now()); })
+  next().then(function(){ lastErr = ''; save('products', state.products); save('synced', Date.now()); state.okOnce = true; })
     .catch(function(e){
       var m = e.message || 'Synchro impossible';
       if (m.indexOf('getSheetByName') >= 0 || m.indexOf('feuille') >= 0) m = 'Le script doit être créé depuis la feuille Google (Extensions → Apps Script).';
       lastErr = navigator.onLine ? m : 'Hors connexion : les changements seront envoyés plus tard';
     })
-    .then(function(){ busy = false; $('refresh').classList.remove('spin'); render(); });
+    .then(function(){ busy = false; $('refresh').classList.remove('spin'); render(); if (state.okOnce && !lastErr) cleanDefaults(); });
+}
+var DEFAULTS = ['Bananes','Pommes','Citrons','Tomates','Salade','Oignons','Pommes de terre','Carottes','Lait','Œufs','Beurre','Yaourts',
+  'Fromage râpé','Crème fraîche','Jambon','Poulet','Steaks hachés','Saumon','Pain','Pâtes','Riz','Farine','Sucre',"Huile d'olive",'Café',
+  'Céréales','Sauce tomate','Sel','Poivre','Eau',"Jus d'orange",'Légumes surgelés','Glaces','Papier toilette','Gel douche','Dentifrice',
+  'Shampoing','Mouchoirs','Liquide vaisselle','Lessive','Éponges','Sacs poubelle','Essuie-tout'];
+/** Retire une fois les produits de base ajoutés au départ (ceux que personne n'a touchés). */
+function cleanDefaults(){
+  if (DEMO || load('cleaned', false)) return;
+  save('cleaned', true);
+  var dels = state.products.filter(function(p){ return DEFAULTS.indexOf(p.name) >= 0 && !p.by && !p.missing; })
+    .map(function(p){ return { action: 'del', id: p.id }; });
+  if (dels.length) opsBatch(dels);
 }
 function op(o){
   o.by = state.who;
@@ -189,13 +213,25 @@ function grouped(list){
     return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b);
   }).map(function(k){ return [k, g[k].sort(function(a, b){ return a.name.localeCompare(b.name, 'fr'); })]; });
 }
+function inCat(p){ return state.cat === 'all' || p.cat === state.cat || (state.cat === 'Autre' && !EMO[p.cat]); }
+function renderCats(){
+  var base = state.page === 'buy' ? state.products.filter(function(p){ return p.missing; }) : state.products;
+  var counts = {}; base.forEach(function(p){ var c = EMO[p.cat] ? p.cat : 'Autre'; counts[c] = (counts[c] || 0) + 1; });
+  var html = '<button class="chip' + (state.cat === 'all' ? ' on' : '') + '" data-cat="all">Tout<small>' + base.length + '</small></button>';
+  CATS.forEach(function(c){
+    if (state.page === 'buy' && !counts[c[0]] && state.cat !== c[0]) return;
+    html += '<button class="chip' + (state.cat === c[0] ? ' on' : '') + '" data-cat="' + esc(c[0]) + '">' + c[1] + ' ' + c[0] + (counts[c[0]] ? '<small>' + counts[c[0]] + '</small>' : '') + '</button>';
+  });
+  $('cats').innerHTML = html;
+}
 function render(){
-  var missing = state.products.filter(function(p){ return p.missing; });
-  $('badge').textContent = missing.length ? missing.length : '';
-  $('badge').style.display = missing.length ? '' : 'none';
+  var allMissing = state.products.filter(function(p){ return p.missing; });
+  var missing = allMissing.filter(inCat);
+  $('badge').textContent = allMissing.length ? allMissing.length : '';
+  $('badge').style.display = allMissing.length ? '' : 'none';
   $('title').textContent = state.page === 'buy' ? 'À acheter' : 'Produits';
   $('sub').textContent = state.page === 'buy'
-    ? (missing.length ? missing.length + ' produit' + (missing.length > 1 ? 's' : '') + ' manque' + (missing.length > 1 ? 'nt' : '') : 'Rien ne manque')
+    ? (allMissing.length ? allMissing.length + ' produit' + (allMissing.length > 1 ? 's' : '') + ' manque' + (allMissing.length > 1 ? 'nt' : '') : 'Rien ne manque')
     : state.products.length + ' produits · touche ce qui manque';
   document.querySelectorAll('nav button').forEach(function(b){ b.classList.toggle('on', b.dataset.p === state.page); });
   $('p-buy').classList.toggle('on', state.page === 'buy');
@@ -206,8 +242,11 @@ function render(){
     $('allList').innerHTML = ''; $('status').textContent = ''; return;
   }
 
+  renderCats();
   // Page « À acheter »
-  if (!missing.length) {
+  if (!missing.length && allMissing.length) {
+    $('p-buy').innerHTML = '<div class="empty"><b>✓</b>Rien ne manque dans ce rayon.</div>';
+  } else if (!missing.length) {
     $('p-buy').innerHTML = '<div class="empty"><b>🎉</b>Rien ne manque pour l\'instant.<br><span style="color:var(--dim);font-size:15px">Ajoute ce qui manque depuis « Produits ».</span></div>';
   } else {
     $('p-buy').innerHTML = grouped(missing).map(function(g){
@@ -224,19 +263,19 @@ function render(){
 }
 function renderAll(){
   var q = $('q').value.trim().toLowerCase();
-  var list = state.products.filter(function(p){ return !q || p.name.toLowerCase().indexOf(q) >= 0; });
+  var list = state.products.filter(function(p){ return (!q || p.name.toLowerCase().indexOf(q) >= 0) && (q || inCat(p)); });
   var exact = state.products.some(function(p){ return p.name.toLowerCase() === q; });
   $('addzone').innerHTML = q && !exact ? '<div class="addcard"><div class="ttl">＋ Ajouter « ' + esc($('q').value.trim()) + ' »</div>' +
     '<div class="lbl">Rayon</div><div class="chips">' + CATS.map(function(c, i){
       return '<button class="chip' + (i === addCat ? ' on' : '') + '" data-addcat="' + i + '">' + c[1] + ' ' + c[0] + '</button>';
-    }).join('') + '</div><button class="big" id="addBtn">Ajouter à ce qui manque</button></div>' : '';
+    }).join('') + '</div><button class="big" id="addBtn">Ajouter à ce qui manque</button><button class="big ghost" id="addStock">Juste l\'ajouter aux produits</button></div>' : '';
   $('allList').innerHTML = list.length ? grouped(list).map(function(g){
     return '<div class="group"><h2>' + (EMO[g[0]] || '📦') + ' ' + esc(g[0]) + '</h2><div class="card">' + g[1].map(function(p){
       return '<div class="row" data-toggle="' + esc(p.id) + '"><div class="name">' + esc(p.name) + '</div>' +
         '<span class="pill' + (p.missing ? ' on' : '') + '">' + (p.missing ? '✓ Manque' : 'En stock') + '</span>' +
         '<button class="edit" data-edit="' + esc(p.id) + '" aria-label="Modifier">✎</button></div>';
     }).join('') + '</div></div>';
-  }).join('') : (q ? '' : '<div class="empty"><b>📋</b>Aucun produit pour l\'instant.<br>Tape un nom en haut pour l\'ajouter.</div>');
+  }).join('') : (q ? '' : '<div class="empty"><b>📋</b>' + (state.cat === 'all' ? 'Aucun produit pour l\'instant.' : 'Aucun produit dans ce rayon.') + '<br>Tape un nom en haut pour l\'ajouter.</div>');
 }
 var addCat = 3;
 
@@ -252,9 +291,17 @@ function toast(msg, undo){
 $('toastBtn').onclick = function(){ if (undoFn) undoFn(); $('toast').classList.remove('on'); };
 
 document.addEventListener('click', function(e){
-  var t = e.target.closest('[data-buy],[data-toggle],[data-edit],[data-addcat],#addBtn,nav button');
+  var t = e.target.closest('[data-buy],[data-toggle],[data-edit],[data-addcat],[data-cat],#addBtn,#addStock,#bulkBtn,nav button');
   if (!t) return;
   if (t.dataset.p) { state.page = t.dataset.p; render(); window.scrollTo(0, 0); return; }
+  if (t.dataset.cat) {
+    state.cat = t.dataset.cat; save('cat', state.cat);
+    var ci = CATS.map(function(c){ return c[0]; }).indexOf(state.cat);
+    if (ci >= 0) addCat = ci;
+    render(); return;
+  }
+  if (t.id === 'addStock') { addProduct(false); return; }
+  if (t.id === 'bulkBtn') { bulkSheet(); return; }
   if (t.dataset.buy) {
     var p = find(t.dataset.buy); if (!p) return;
     op({ action: 'set', id: p.id, missing: '0' });
@@ -269,14 +316,47 @@ document.addEventListener('click', function(e){
     return;
   }
   if (t.dataset.addcat) { addCat = +t.dataset.addcat; renderAll(); return; }
-  if (t.id === 'addBtn') addProduct();
+  if (t.id === 'addBtn') addProduct(true);
 });
-function addProduct(){
+function addProduct(missing){
+  if (missing === undefined) missing = true;
   var name = $('q').value.trim(); if (!name) return;
   name = name.charAt(0).toUpperCase() + name.slice(1);
-  op({ action: 'add', id: uid(), name: name, cat: CATS[addCat][0], missing: '1' });
+  op({ action: 'add', id: uid(), name: name, cat: CATS[addCat][0], missing: missing ? '1' : '0' });
   $('q').value = ''; renderAll();
-  toast(name + ' ajouté à « À acheter »');
+  toast(missing ? name + ' ajouté à « À acheter »' : name + ' ajouté aux produits');
+}
+function opsBatch(list){
+  list.forEach(function(o){ o.by = state.who; state.pending.push(o); });
+  save('pending', state.pending);
+  state.products = applyPending(state.products.slice().map(function(p){ return Object.assign({}, p); }));
+  save('products', state.products);
+  render(); sync();
+}
+function bulkSheet(){
+  var ci = addCat;
+  openSheet('<h3>Ajouter plusieurs produits</h3><p>Un produit par ligne. Tu peux coller une liste depuis tes notes.</p>' +
+    '<textarea id="bText" placeholder="Lait d\'avoine&#10;Croquettes chat&#10;Pain de mie"></textarea>' +
+    '<div class="lbl">Rayon</div><div class="chips" id="bCats">' +
+    CATS.map(function(c, i){ return '<button class="chip' + (i === ci ? ' on' : '') + '" data-i="' + i + '">' + c[1] + ' ' + c[0] + '</button>'; }).join('') +
+    '</div><label class="switch"><input type="checkbox" id="bMiss"> Les mettre aussi dans « À acheter »</label>' +
+    '<button class="big" id="bOk">Ajouter</button>');
+  $('bCats').onclick = function(e){ var b = e.target.closest('.chip'); if (!b) return; ci = +b.dataset.i;
+    [].forEach.call($('bCats').children, function(c, i){ c.classList.toggle('on', i === ci); }); };
+  $('bOk').onclick = function(){
+    var miss = $('bMiss').checked;
+    var seen = {};
+    var names = $('bText').value.split(/\n|,|;/).map(function(x){ return x.replace(/^[-•*\s]+/, '').trim(); })
+      .filter(function(x){ var k = x.toLowerCase(); if (!x || seen[k]) return false; seen[k] = 1; return true; });
+    if (!names.length) return;
+    opsBatch(names.map(function(n){
+      var ex = state.products.filter(function(p){ return p.name.toLowerCase() === n.toLowerCase(); })[0];
+      if (ex) return { action: 'set', id: ex.id, missing: miss || ex.missing ? '1' : '0' };
+      return { action: 'add', id: uid(), name: n.charAt(0).toUpperCase() + n.slice(1), cat: CATS[ci][0], missing: miss ? '1' : '0' };
+    }));
+    closeSheet();
+    toast(names.length + ' produit' + (names.length > 1 ? 's' : '') + ' ajouté' + (names.length > 1 ? 's' : ''));
+  };
 }
 $('q').addEventListener('input', renderAll);
 $('q').addEventListener('keydown', function(e){
@@ -315,7 +395,7 @@ $('settings').onclick = function(){
   openSheet('<h3>Réglages</h3><div class="lbl">Ton prénom</div><input id="sName" value="' + esc(state.who) + '">' +
     '<div class="lbl">Lien de la liste (script Google)</div><input id="sApi" placeholder="https://script.google.com/macros/s/…/exec" value="' + esc(state.api) + '">' +
     '<button class="big" id="sOk">Enregistrer</button>' +
-    '<button class="big ghost" id="sShare">Partager l\'appli</button>');
+    '<button class="big ghost" id="sShare">Partager l\'appli</button>' );
   $('sOk').onclick = function(){
     state.who = $('sName').value.trim() || state.who; save('who', state.who);
     var a = $('sApi').value.trim(); if (a !== state.api) { state.api = a; save('api', a); state.products = []; }
