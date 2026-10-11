@@ -68,8 +68,8 @@ nav .badge{background:var(--gold);color:var(--bg);border-radius:10px;padding:0 7
 .sheet input{width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;color:var(--txt);font-size:17px;padding:14px;outline:none;margin-bottom:12px}
 .sheet input:focus{border-color:var(--gold)}
 .lbl{font-size:13px;color:var(--dim);font-weight:700;margin:6px 0 8px}
-.toast{position:fixed;left:16px;right:16px;bottom:calc(92px + var(--safe-b));z-index:30;background:#2B2E38;color:var(--txt);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.4);transform:translateY(150%);opacity:0;transition:.25s}
-.toast.on{transform:none;opacity:1}
+.toast{position:fixed;left:16px;right:16px;bottom:calc(92px + var(--safe-b));z-index:30;background:#2B2E38;color:var(--txt);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.4);transform:translateY(150%);opacity:0;transition:.25s;pointer-events:none}
+.toast.on{transform:none;opacity:1;pointer-events:auto}
 .toast span{flex:1}
 .toast button{color:var(--gold);font-weight:800;padding:4px 6px}
 .status{font-size:12px;color:var(--dim);text-align:center;margin:18px 0 6px}
@@ -161,7 +161,11 @@ function sync(){
     return call({ action: 'list' }).then(function(j){ state.products = applyPending(j.products); });
   };
   next().then(function(){ lastErr = ''; save('products', state.products); save('synced', Date.now()); })
-    .catch(function(e){ lastErr = navigator.onLine ? (e.message || 'Synchro impossible') : 'Hors connexion : les changements seront envoyés plus tard'; })
+    .catch(function(e){
+      var m = e.message || 'Synchro impossible';
+      if (m.indexOf('getSheetByName') >= 0 || m.indexOf('feuille') >= 0) m = 'Le script doit être créé depuis la feuille Google (Extensions → Apps Script).';
+      lastErr = navigator.onLine ? m : 'Hors connexion : les changements seront envoyés plus tard';
+    })
     .then(function(){ busy = false; $('refresh').classList.remove('spin'); render(); });
 }
 function op(o){
